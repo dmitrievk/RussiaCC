@@ -4,9 +4,9 @@ import requests
 import json
 
 class CollectData:
-    # Russian providers do not block every pages from the register (idk why).
-    # This is the list of manually selected pages that cannot be accessed from russian VPN server (IPVanish)
-    # but they are accessible from servers outside of Russia
+    # Russian providers do not block every page from the register (idk why).
+    # This is the list of manually selected pages that cannot be accessed from the russian VPN server (IPVanish)
+    # but they are accessible from the servers outside of Russia
     listOfDefinitelyBlockedPages = [{'url': 'http://leonwolf.livejournal.com', 'ip': '208.93.0.190'},
                                     {'url': 'http://navalny.livejournal.com', 'ip': '208.93.0.190'}]
 
