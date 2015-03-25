@@ -75,17 +75,28 @@ class OpenVPNConnection(Connection):
             telnet_talk = telnetlib.Telnet()
 
             try:
+                # initial connection to release the hold
                 telnet_talk.open('127.0.0.1', port)
-            except ConnectionRefusedError:
-                raise OpenVPNException('Cannot connect to management')
-            telnet_talk.write(b'hold release\r\n')
-            telnet_talk.write(b'state on\r\n')
-            msg = telnet_talk.read_until(b'CONNECTED,SUCCESS')
-            #print(msg)
-            #rest = telnet_talk.read_until(b'\r\n')
-            telnet_talk.close()
+                telnet_talk.write(b'hold release\r\n')
+                telnet_talk.write(b'state on\r\n')
+                msg = telnet_talk.read_until(b'CONNECTED,SUCCESS')
+                telnet_talk.close()
+                # second connection to make sure we fully connected
+                telnet_talk.open('127.0.0.1', port)
+                telnet_talk.write(b'state\r\n')
+                msg = telnet_talk.read_until(b'CONNECTED,SUCCESS')
+                telnet_talk.close()
+                self.connected = True
 
-            self.connected = True
+            except ConnectionRefusedError:
+                self.connected = False
+
+            except ConnectionResetError:
+                self.connected = False
+
+            if not self.connected:
+                raise OpenVPNException('Cannot connect')
+
 
         else:
             # platform not supported
@@ -100,8 +111,8 @@ class OpenVPNConnection(Connection):
         telnet_talk = telnetlib.Telnet()
         try:
             telnet_talk.open('127.0.0.1', port)
+            telnet_talk.write(b'signal SIGTERM\r\n')
+            telnet_talk.read_all()
+            telnet_talk.close()
         except ConnectionRefusedError:
             raise OpenVPNException('Cannot connect to management')
-        telnet_talk.write(b'signal SIGTERM\r\n')
-        telnet_talk.read_all()
-        telnet_talk.close()
