@@ -1,0 +1,9 @@
+finland, hel-c01.ipvanish.com
+Estonia, tll-c01.ipvanish.com
+Latvia, rix-c01.ipvanish.com
+Lithuania, vno-c01.ipvanish.com
+Belarus, msq-c01.ipvanish.com
+Ukraine, hrk-c01.ipvanish.com
+Kazakhstan, kgf-c01.ipvanish.com
+kyrgyzstan, fru-c01.ipvanish.com
+russia, dme-c01.ipvanish.com
