@@ -1,6 +1,6 @@
 __author__ = 'tian'
 
-from Connection import Connection
+from .Connection import Connection
 
 
 class DirectConnection(Connection):

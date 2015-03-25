@@ -67,7 +67,11 @@ class OpenVPNConnection(Connection):
             port = self.management_port
             # port = 1337
             telnet_talk = telnetlib.Telnet()
-            telnet_talk.open('127.0.0.1', port)
+
+            try:
+                telnet_talk.open('127.0.0.1', port)
+            except telnetlib.ConnectionRefusedError:
+                raise OpenVPNException('Cannot connect to management')
             telnet_talk.write(b'hold release\r\n')
             telnet_talk.write(b'state on\r\n')
             telnet_talk.read_until(b'CONNECTED,SUCCESS')
@@ -84,7 +88,10 @@ class OpenVPNConnection(Connection):
         port = self.management_port
         # port = 1337
         telnet_talk = telnetlib.Telnet()
-        telnet_talk.open('127.0.0.1', port)
+        try:
+            telnet_talk.open('127.0.0.1', port)
+        except telnetlib.ConnectionRefusedError:
+            raise OpenVPNException('Cannot connect to management')
         telnet_talk.write(b'signal SIGTERM\r\n')
         telnet_talk.read_all()
         telnet_talk.close()
