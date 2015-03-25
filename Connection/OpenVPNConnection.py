@@ -9,16 +9,16 @@ from Connection import Connection
 
 
 class OpenVPNException(Exception):
-    def __ini__(self, msg):
-        super().__init__(msg)
+    pass
 
 
 class OpenVPNConnection(Connection):
     def __init__(self, **kwargs):
         super().__init__()
-
-        for key, value in kwargs:
+        for key, value in kwargs.items():
             setattr(self, key, value)
+
+        self.connected = False
 
     def connect(self):
         if platform.system() == 'Darwin':
@@ -44,25 +44,31 @@ class OpenVPNConnection(Connection):
 
             # set up
 
-            call_line = [
+            call_line = ' '.join([
                 'openvpn',
                 '--daemon',
                 '--cd', self.cd,
                 '--config', self.config,
                 '--cd', self.cd,
                 '--auth-user-pass', self.auth,
-                '--management', '127.0.0.1', self.management_port,
-                '--management-query-password',
+                '--management', '127.0.0.1', str(self.management_port),
+                '--management-query-passwords',
                 '--management-hold',
-                '--script-security',
+                '--script-security', '2'
                 '--up', self.up_script,
                 '--down', self.down_script,
-            ]
+            ])
 
+            #print('Run VPN: call_line:')
+            #print(call_line)
+            #print('END')
             try:
-                subprocess.check_call(call_line)
-            except subprocess.CalledProcessError:
-                raise OpenVPNException
+                subprocess.check_call(call_line, shell=True)
+            except subprocess.CalledProcessError as e:
+                print(e.cmd)
+                print(e.returncode)
+                print(e.output)
+                raise OpenVPNException('Failed to run VPN', e.cmd, e.output)
 
             port = self.management_port
             # port = 1337
@@ -70,13 +76,16 @@ class OpenVPNConnection(Connection):
 
             try:
                 telnet_talk.open('127.0.0.1', port)
-            except telnetlib.ConnectionRefusedError:
+            except ConnectionRefusedError:
                 raise OpenVPNException('Cannot connect to management')
             telnet_talk.write(b'hold release\r\n')
             telnet_talk.write(b'state on\r\n')
-            telnet_talk.read_until(b'CONNECTED,SUCCESS')
-            rest = telnet_talk.read_until(b'\r\n')
+            msg = telnet_talk.read_until(b'CONNECTED,SUCCESS')
+            #print(msg)
+            #rest = telnet_talk.read_until(b'\r\n')
             telnet_talk.close()
+
+            self.connected = True
 
         else:
             # platform not supported
@@ -85,12 +94,13 @@ class OpenVPNConnection(Connection):
         pass
 
     def close(self):
+        if not self.connected:
+            return
         port = self.management_port
-        # port = 1337
         telnet_talk = telnetlib.Telnet()
         try:
             telnet_talk.open('127.0.0.1', port)
-        except telnetlib.ConnectionRefusedError:
+        except ConnectionRefusedError:
             raise OpenVPNException('Cannot connect to management')
         telnet_talk.write(b'signal SIGTERM\r\n')
         telnet_talk.read_all()
