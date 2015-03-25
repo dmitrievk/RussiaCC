@@ -1,6 +1,12 @@
 # credits
 ipvanishcredits.txt
 
+# IP Vanish Configs
+ipvanish-openvpn-configs
+
+# OS X files
+.DS_Store
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
