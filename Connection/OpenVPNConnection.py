@@ -65,8 +65,7 @@ class OpenVPNConnection(Connection):
                 raise OpenVPNException
 
             port = self.management_port
-            # delete the following line
-            port = 1337
+            # port = 1337
             telnet_talk = telnetlib.Telnet()
             telnet_talk.open('127.0.0.1', port)
             telnet_talk.write(b'hold release\r\n')
@@ -83,7 +82,7 @@ class OpenVPNConnection(Connection):
 
     def close(self):
         port = self.management_port
-        port = 1337
+        # port = 1337
         telnet_talk = telnetlib.Telnet()
         telnet_talk.open('127.0.0.1', port)
         telnet_talk.write(b'signal SIGTERM\r\n')

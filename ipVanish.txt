@@ -1,9 +1,9 @@
-finland, hel-c01.ipvanish.com
-Estonia, tll-c01.ipvanish.com
-Latvia, rix-c01.ipvanish.com
-Lithuania, vno-c01.ipvanish.com
-Belarus, msq-c01.ipvanish.com
-Ukraine, hrk-c01.ipvanish.com
-Kazakhstan, kgf-c01.ipvanish.com
-kyrgyzstan, fru-c01.ipvanish.com
-russia, dme-c01.ipvanish.com
+Finland,hel-c01.ipvanish.com,ipvanish-FI-Helsinki-hel-c01.ovpn
+Estonia,tll-c01.ipvanish.com,ipvanish-EE-Tallinn-tll-c01.ovpn
+Latvia,rix-c01.ipvanish.com,ipvanish-LV-Riga-rix-c01.ovpn
+Lithuania,vno-c01.ipvanish.com,ipvanish-LT-Vilnius-vno-c01.ovpn
+Belarus,msq-c01.ipvanish.com,ipvanish-BY-Minsk-msq-c01.ovpn
+Ukraine,hrk-c01.ipvanish.com,ipvanish-UA-Kharkiv-hrk-c01.ovpn
+Kazakhstan,kgf-c01.ipvanish.com,ipvanish-KZ-Karaganda-kgf-c01.ovpn
+kyrgyzstan,fru-c01.ipvanish.com,ipvanish-KG-Bishkek-fru-c01.ovpn
+russia,dme-c01.ipvanish.com,ipvanish-RU-Moscow-dme-c01.ovpn
