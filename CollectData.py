@@ -75,6 +75,18 @@ class CollectData:
             print('IP after using VPN', Connection.get_ip())
         pass
 
+    # returns list of first n urls from AntiZapret
+    def getListOfFirstNurlsFromAntiZapret(self, numberOfURLS):
+        requestAListOfBlockedWebsites = requests.get('http://api.antizapret.info/all.php?type=json')
+        # decode the received data
+        listOfBlockedWebsites = json.loads(requestAListOfBlockedWebsites.text)['register']
+        listOfURLs = []
+        for blockedWebsite in listOfBlockedWebsites[:numberOfURLS]:
+            listOfURLs.append(blockedWebsite['url'])
+        return listOfURLs
+
+
 # # Examples:
 # collectDataHandler = CollectData()
+# print(collectDataHandler.getListOfFirstNurlsFromAntiZapret(10))
 # collectDataHandler.collectMultipleWebpagesFromASingleCountry(1, 2, 1)
