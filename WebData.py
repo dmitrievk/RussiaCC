@@ -1,4 +1,4 @@
-__author__ = 'JesseBrizzi'
+__author__ = 'JesseBrizzi konstantindmitriev'
 # sample usage
 # ----------------------------------------------------------------
 # test = WebData()
@@ -85,7 +85,7 @@ class WebData:
 
         return []
 
-    # gets a dictionary of all of the examples of a single webpage, the dictionary key are the vpn names
+    # gets a dictionary of all of the examples (from current session) of a single webpage, the dictionary key are the vpn names
     def get_all_webpages(self, address):
         out = {}
 
@@ -96,3 +96,12 @@ class WebData:
                     out[d] = temp
 
         return out
+
+    # specify the name of the folder, in case you want to analyze already gathered data
+    # session is the name of the folder with data (=time)
+    def setSession(self, session):
+        self.nameDir = os.path.join(expanduser("~"), session)
+
+    # returns path to the main folder
+    def getPathToSession(self):
+        return self.nameDir
