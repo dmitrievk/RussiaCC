@@ -81,3 +81,17 @@ from .DirectConnection import DirectConnection
 from .OpenVPNConnection import OpenVPNConnection, OpenVPNException
 from .IPVanishConnection import IPVanishConnection, IPVanishException, NoSuchCountryException
 from .Util import get_ip
+
+
+"""
+import Connection
+print('IP before using VPN', Connection.get_ip())
+connection = Connection.IPVanishConnection('Finland')
+print('connecting...')
+connection.connect()
+print('connected')
+print('IP while using VPN', Connection.get_ip())
+connection.close()
+print('closed')
+print('IP after using VPN', Connection.get_ip())
+"""

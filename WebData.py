@@ -53,6 +53,7 @@ class WebData:
         if not os.path.exists(self.nameDir):
             os.makedirs(self.nameDir)
 
+
     # takes in 3 strings, one for the VPN that was used for this data, the web address, and the actual HTML
     # if no vpn is given it assumes that it was collected using the local conection and names the flder local.
     def save_webpage(self, html, address, vpn=None):
