@@ -1,4 +1,4 @@
-__author__ = 'Jesse'
+__author__ = 'JesseBrizzi'
 # sample usage
 # ----------------------------------------------------------------
 # test = WebData()

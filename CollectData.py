@@ -1,7 +1,11 @@
-__author__ = 'konstantindmitriev'
+__author__ = 'konstantindmitriev JesseBrizzi'
 
+# download and install requests "pip3 install requests"
 import requests
 import json
+from WebData import WebData
+import Connection
+
 
 class CollectData:
     # Russian providers do not block every page from the register (idk why).
@@ -17,8 +21,12 @@ class CollectData:
         pass
 
     # access multiple webpages from a single country
-    def collectMultipleWebpagesFromASingleCountry(self, countryID, numberOfWebpagesToAccess, flagUseManuallySelectedListInsteadOfAntiZapret):
+    def collectMultipleWebpagesFromASingleCountry(self, countryID, numberOfWebpagesToAccess, flagUseManuallySelectedListInsteadOfAntiZapret, testData):
         # open the connection using countryID
+        print('IP before using VPN', Connection.get_ip())
+        connection = Connection.IPVanishConnection(countryID)
+        print('connected to ' + countryID)
+        print('IP while using VPN', Connection.get_ip())
 
         # listOfBlockedWebsites = []
         if (flagUseManuallySelectedListInsteadOfAntiZapret):
@@ -36,8 +44,12 @@ class CollectData:
             # print(htmlCodeOfThePage)
 
             # save html code of the page (input: blockedURL, htmlCodeOfThePage)
+            testData.save_webpage(htmlCodeOfThePage, blockedURL, countryID)
 
         # close the connection
+        connection.close()
+        print('closed')
+        print('IP after using VPN', Connection.get_ip())
 
     # access a single webpage from multiple countries
     def collectOneWebpageFromMultipleCoutries(self, listOfCountryIDs, url):
