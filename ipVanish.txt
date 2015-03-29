@@ -5,5 +5,5 @@ Lithuania,vno-c01.ipvanish.com,ipvanish-LT-Vilnius-vno-c01.ovpn
 Belarus,msq-c01.ipvanish.com,ipvanish-BY-Minsk-msq-c01.ovpn
 Ukraine,hrk-c01.ipvanish.com,ipvanish-UA-Kharkiv-hrk-c01.ovpn
 Kazakhstan,kgf-c01.ipvanish.com,ipvanish-KZ-Karaganda-kgf-c01.ovpn
-kyrgyzstan,fru-c01.ipvanish.com,ipvanish-KG-Bishkek-fru-c01.ovpn
-russia,dme-c01.ipvanish.com,ipvanish-RU-Moscow-dme-c01.ovpn
+Kyrgyzstan,fru-c01.ipvanish.com,ipvanish-KG-Bishkek-fru-c01.ovpn
+Russia,dme-c01.ipvanish.com,ipvanish-RU-Moscow-dme-c01.ovpn

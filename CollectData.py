@@ -25,6 +25,8 @@ class CollectData:
         # open the connection using countryID
         print('IP before using VPN', Connection.get_ip())
         connection = Connection.IPVanishConnection(countryID)
+        print('connecting...')
+        connection.connect()
         print('connected to ' + countryID)
         print('IP while using VPN', Connection.get_ip())
 
