@@ -26,12 +26,12 @@ collect = CollectData()
 testData = WebData()
 htmlComparison = HTMLComparison()
 
-numberOfWebPagesToAccess = 3
-blockingCountry = 'Latvia'
+numberOfWebPagesToAccess = 10
+blockingCountry = 'Russia'
 
 # list of countries to explore
 # countries = ['Finland', 'Estonia', 'Latvia', 'Lithuania', 'Belarus', 'Ukraine', 'Kazakhstan', 'Kyrgyzstan', 'Russia']
-countries = ['Finland', 'Estonia', 'Latvia']
+countries = ['Finland', 'Estonia', 'Russia']
 
 for country in countries:
     print()
