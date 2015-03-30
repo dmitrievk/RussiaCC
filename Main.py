@@ -33,7 +33,7 @@ def main():
 
     # list of countries to explore
     # countries = ['Finland', 'Estonia', 'Latvia', 'Lithuania', 'Belarus', 'Ukraine', 'Kazakhstan', 'Kyrgyzstan', 'Russia']
-    countries = ['Finland', 'Estonia', 'Russia']
+    countries = ['Finland', 'Estonia', 'Latvia', 'Russia']
 
     for country in countries:
         print()
@@ -43,18 +43,18 @@ def main():
             use_manually_selected_list=False,
             test_data=test_data)
 
-    listOfURLs = collect.getListOfFirstNurlsFromAntiZapret(number_of_webpages)
+    list_of_urls = collect.get_list_of_first_n_urls_from_antizapret(number_of_webpages)
+    print(list_of_urls)
 
     session = False  # means current session
     # session = "2015-03-29_12-47-36"
 
-    dictOfPercentageOfSimilarity = html_comparison.compareFilesBetweenCountries(blocking_country, countries, test_data,
-                                                                                listOfURLs, False)
-
+    dict_of_percentage_of_similarity = html_comparison.compare_files_between_countries(blocking_country, countries, test_data,
+                                                                                list_of_urls, session)
 
     # writing the results of the comparison
     w = csv.writer(open(test_data.getPathToSession() + "--output.csv", "w"))
-    for country, urlAndPercentage in dictOfPercentageOfSimilarity.items():
+    for country, urlAndPercentage in dict_of_percentage_of_similarity.items():
         w.writerow([country, urlAndPercentage])
 
     # # reading the results of the comparison

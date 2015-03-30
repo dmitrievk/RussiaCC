@@ -11,7 +11,7 @@ class CollectData:
     # Russian providers do not block every page from the register
     # This is the list of manually selected pages that cannot be accessed from the russian VPN server (IPVanish)
     # but they are accessible from the servers outside of Russia
-    listOfDefinitelyBlockedPages = [{'url': 'http://leonwolf.livejournal.com', 'ip': '208.93.0.190'},
+    list_of_definitely_blocked_pages = [{'url': 'http://leonwolf.livejournal.com', 'ip': '208.93.0.190'},
                                     {'url': 'http://navalny.livejournal.com', 'ip': '208.93.0.190'}]
 
     def __init__(self):
@@ -29,13 +29,13 @@ class CollectData:
     ):
         # open the connection using countryID
         print('IP before using VPN', Connection.get_ip())
-        """
-        if country_id is not None:
-            connection = Connection.IPVanishConnection(country_id)
-        else:
-            connection = Connection.DirectConnection()
-        """
-        # TODO: after debugging, comment the following line out and use part above
+
+        # if country_id is not None:
+        #     connection = Connection.IPVanishConnection(country_id)
+        # else:
+        #     connection = Connection.DirectConnection()
+        #     country_id = 'SampleCountry'
+
         connection = Connection.DirectConnection()
 
         print('connecting...')
@@ -43,23 +43,25 @@ class CollectData:
         print('connected to ' + country_id)
         print('IP while using VPN', Connection.get_ip())
 
-        # listOfBlockedWebsites = []
-        if (use_manually_selected_list):
-            listOfBlockedWebsites = self.listOfDefinitelyBlockedPages
+        # list_of_blocked_websites = []
+        if use_manually_selected_list:
+            list_of_blocked_websites = self.list_of_definitely_blocked_pages
         else:
-            requestAListOfBlockedWebsites = requests.get('http://api.antizapret.info/all.php?type=json')
+            request_a_list_of_blocked_websites = requests.get('http://api.antizapret.info/all.php?type=json')
             # decode the received data
-            listOfBlockedWebsites = json.loads(requestAListOfBlockedWebsites.text)['register']
+            list_of_blocked_websites = json.loads(request_a_list_of_blocked_websites.text)['register']
         # go through websites in the list
-        for blockedWebsite in listOfBlockedWebsites[:number_of_webpages]:  # first n results
-            blockedURL = blockedWebsite['url']
-            htmlCodeOfThePage = requests.get(blockedURL, timeout=8).text  # timeout = 8 seconds
+        for blocked_website in list_of_blocked_websites[:number_of_webpages]:  # first n results
+            blocked_url = blocked_website['url']
+            html_code_of_the_page = requests.get(blocked_url, timeout=8).text  # timeout = 8 seconds
 
-            # print(blockedURL)
-            # print(htmlCodeOfThePage)
+            if html_code_of_the_page == '':
+                html_code_of_the_page = "None"
+            # print(blocked_url)
+            # print(html_code_of_the_page)
 
-            # save html code of the page (input: blockedURL, htmlCodeOfThePage)
-            test_data.save_webpage(htmlCodeOfThePage, blockedURL, country_id)
+            # save html code of the page (input: blocked_url, html_code_of_the_page)
+            test_data.save_webpage(html_code_of_the_page, blocked_url, country_id)
 
         # close the connection
         connection.close()
@@ -67,21 +69,20 @@ class CollectData:
         print('IP after using VPN', Connection.get_ip())
 
     # access a single webpage from multiple countries
-    # TODO: Update later this method
-    def collectOneWebpageFromMultipleCoutries(self, listOfCountryIDs, url, testData):
-        for countryID in listOfCountryIDs:
-            # open the connection using countryID
+    def collect_one_webpage_from_multiple_coutries(self, list_of_country_ids, url, test_data):
+        for country_id in list_of_country_ids:
+            # open the connection using country_id
             print('IP before using VPN', Connection.get_ip())
-            connection = Connection.IPVanishConnection(countryID)
+            connection = Connection.IPVanishConnection(country_id)
             print('connecting...')
             connection.connect()
-            print('connected to ' + countryID)
+            print('connected to ' + country_id)
             print('IP while using VPN', Connection.get_ip())
 
-            htmlCodeOfThePage = requests.get(url).text
+            html_code_of_the_page = requests.get(url).text
 
-            # save html code of the page (input: url, htmlCodeOfThePage)
-            testData.save_webpage(htmlCodeOfThePage, url, countryID)
+            # save html code of the page (input: url, html_code_of_the_page)
+            test_data.save_webpage(html_code_of_the_page, url, country_id)
 
             # close the connection
             connection.close()
@@ -90,14 +91,14 @@ class CollectData:
         pass
 
     # returns list of first n urls from AntiZapret
-    def getListOfFirstNurlsFromAntiZapret(self, numberOfURLS):
-        requestAListOfBlockedWebsites = requests.get('http://api.antizapret.info/all.php?type=json')
+    def get_list_of_first_n_urls_from_antizapret(self, number_of_urls):
+        request_a_List_of_blocked_websites = requests.get('http://api.antizapret.info/all.php?type=json')
         # decode the received data
-        listOfBlockedWebsites = json.loads(requestAListOfBlockedWebsites.text)['register']
-        listOfURLs = []
-        for blockedWebsite in listOfBlockedWebsites[:numberOfURLS]:
-            listOfURLs.append(blockedWebsite['url'])
-        return listOfURLs
+        list_of_blocked_websites = json.loads(request_a_List_of_blocked_websites.text)['register']
+        list_of_urls = []
+        for blocked_website in list_of_blocked_websites[:number_of_urls]:
+            list_of_urls.append(blocked_website['url'])
+        return list_of_urls
 
 
 # # Examples:
