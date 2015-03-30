@@ -21,24 +21,37 @@ class CollectData:
         pass
 
     # access multiple webpages from a single country
-    def collectMultipleWebpagesFromASingleCountry(self, countryID, numberOfWebpagesToAccess, flagUseManuallySelectedListInsteadOfAntiZapret, testData):
+    def collect_multiple_webpages_from_single_country(self,
+                                                  country_id = None,
+                                                  number_of_webpages = -1,
+                                                  use_manually_selected_list = False,
+                                                  test_data = None
+    ):
         # open the connection using countryID
         print('IP before using VPN', Connection.get_ip())
-        connection = Connection.IPVanishConnection(countryID)
+        """
+        if country_id is not None:
+            connection = Connection.IPVanishConnection(country_id)
+        else:
+            connection = Connection.DirectConnection()
+        """
+        # TODO: after debugging, comment the following line out and use part above
+        connection = Connection.DirectConnection()
+
         print('connecting...')
         connection.connect()
-        print('connected to ' + countryID)
+        print('connected to ' + country_id)
         print('IP while using VPN', Connection.get_ip())
 
         # listOfBlockedWebsites = []
-        if (flagUseManuallySelectedListInsteadOfAntiZapret):
+        if (use_manually_selected_list):
             listOfBlockedWebsites = self.listOfDefinitelyBlockedPages
         else:
             requestAListOfBlockedWebsites = requests.get('http://api.antizapret.info/all.php?type=json')
             # decode the received data
             listOfBlockedWebsites = json.loads(requestAListOfBlockedWebsites.text)['register']
         # go through websites in the list
-        for blockedWebsite in listOfBlockedWebsites[:numberOfWebpagesToAccess]:  # first n results
+        for blockedWebsite in listOfBlockedWebsites[:number_of_webpages]:  # first n results
             blockedURL = blockedWebsite['url']
             htmlCodeOfThePage = requests.get(blockedURL, timeout=8).text  # timeout = 8 seconds
 
@@ -46,7 +59,7 @@ class CollectData:
             # print(htmlCodeOfThePage)
 
             # save html code of the page (input: blockedURL, htmlCodeOfThePage)
-            testData.save_webpage(htmlCodeOfThePage, blockedURL, countryID)
+            test_data.save_webpage(htmlCodeOfThePage, blockedURL, country_id)
 
         # close the connection
         connection.close()
@@ -54,6 +67,7 @@ class CollectData:
         print('IP after using VPN', Connection.get_ip())
 
     # access a single webpage from multiple countries
+    # TODO: Update later this method
     def collectOneWebpageFromMultipleCoutries(self, listOfCountryIDs, url, testData):
         for countryID in listOfCountryIDs:
             # open the connection using countryID
