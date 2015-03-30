@@ -31,7 +31,7 @@ blockingCountry = 'Russia'
 
 # list of countries to explore
 # countries = ['Finland', 'Estonia', 'Latvia', 'Lithuania', 'Belarus', 'Ukraine', 'Kazakhstan', 'Kyrgyzstan', 'Russia']
-countries = ['Finland', 'Estonia', 'Russia']
+countries = ['Finland', 'Estonia', 'Ukraine', 'Russia']
 
 for country in countries:
     print()
@@ -42,7 +42,7 @@ listOfURLs = collect.getListOfFirstNurlsFromAntiZapret(numberOfWebPagesToAccess)
 session = False  # means current session
 # session = "2015-03-29_12-47-36"
 
-dictOfPercentageOfSimilarity = htmlComparison.compareFilesBetweenCountries(blockingCountry, countries, testData, listOfURLs, False)
+dictOfPercentageOfSimilarity = htmlComparison.compareFilesBetweenCountries(blockingCountry, countries, testData, listOfURLs, True)
 
 
 # writing the results of the comparison
