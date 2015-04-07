@@ -1,0 +1,358 @@
+
+\documentclass[conference]{IEEEtran}
+\let\labelindent\relax
+\usepackage{blindtext, graphicx}
+\usepackage{listings}
+\usepackage{framed}
+\usepackage{caption}
+\usepackage{float}
+\usepackage{tikz, pgfplots}
+\usepackage{soul}
+
+
+\ifCLASSINFOpdf
+\else
+\fi
+
+% correct bad hyphenation here
+\hyphenation{}
+
+\usepackage{bera}% optional: just to have a nice mono-spaced font
+\usepackage{listings}
+\usepackage{xcolor}
+
+\colorlet{punct}{red!60!black}
+\definecolor{background}{HTML}{EEEEEE}
+\definecolor{delim}{RGB}{20,105,176}
+\colorlet{numb}{magenta!60!black}
+
+\lstdefinelanguage{json}{
+    basicstyle=\ttfamily\normalfont\footnotesize,
+    numbers=left,
+    numberstyle=\scriptsize,
+    stepnumber=1,
+    numbersep=9pt,
+    showstringspaces=false,
+    breaklines=true,
+    frame=lines,
+    backgroundcolor=\color{background},
+    literate=
+     *{0}{{{\color{numb}0}}}{1}
+      {1}{{{\color{numb}1}}}{1}
+      {2}{{{\color{numb}2}}}{1}
+      {3}{{{\color{numb}3}}}{1}
+      {4}{{{\color{numb}4}}}{1}
+      {5}{{{\color{numb}5}}}{1}
+      {6}{{{\color{numb}6}}}{1}
+      {7}{{{\color{numb}7}}}{1}
+      {8}{{{\color{numb}8}}}{1}
+      {9}{{{\color{numb}9}}}{1}
+      {:}{{{\color{punct}{:}}}}{1}
+      {,}{{{\color{punct}{,}}}}{1}
+      {\{}{{{\color{delim}{\{}}}}{1}
+      {\}}{{{\color{delim}{\}}}}}{1}
+      {[}{{{\color{delim}{[}}}}{1}
+      {]}{{{\color{delim}{]}}}}{1},
+}
+
+\usepackage{lmodern}
+\usepackage[utf8]{inputenc}
+\usepackage[russian,english]{babel} % last one is the main language
+\selectlanguage{english}
+
+\newenvironment{russian}{
+\begin{otherlanguage*}{russian}
+}{
+\end{otherlanguage*}
+}
+
+% URL
+\usepackage{hyperref}
+\urlstyle{tt}
+
+% Better discription
+\usepackage{enumitem}
+
+%bib
+
+\newcommand{\code}[1]{\texttt{#1}}
+
+\begin{document}
+%
+% paper title
+% can use linebreaks \\ within to get better formatting as desired
+\title{Russian Collateral Censorship}
+
+
+% author names and affiliations
+% use a multiple column layout for up to three different
+% affiliations
+\author{\IEEEauthorblockN{Jesse Brizzi}
+\IEEEauthorblockA{jbrizzi@cs.stonybrook.edu}
+\and
+\IEEEauthorblockN{Konstantin Dmitriev}
+\IEEEauthorblockA{kdmitriev@cs.stonybrook.edu}
+\and
+\IEEEauthorblockN{Yingtao Tian}
+\IEEEauthorblockA{yittian@cs.stonybrook.edu}
+}
+
+% make the title area
+\maketitle
+
+
+\begin{abstract}
+%\boldmath
+In this project we are proposing a survey of neighboring sovereign nations to modern day Russia to investigate any possible collateral censorship.
+Given the socioeconomic state of some of these countries there may be limited infrastructure for Internet access, which requires their traffic to be routed through Russian territory.
+Russia actively censors various websites and Internet sources based on various reasons.
+
+\end{abstract}
+% IEEEtran.cls defaults to using nonbold math in the Abstract.
+% This preserves the distinction between vectors and scalars. However,
+% if the journal you are submitting to favors bold math in the abstract,
+% then you can use LaTeX's standard command \boldmath at the very start
+% of the abstract to achieve this. Many IEEE journals frown on math
+% in the abstract anyway.
+
+% Note that keywords are not normally used for peerreview papers.
+\begin{IEEEkeywords}
+Collateral Censorship, Russia, Block, DPI, DNS, IP.
+\end{IEEEkeywords}
+
+% For peerreview papers, this IEEEtran command inserts a page break and
+% creates the second title. It will be ignored for other modes.
+\IEEEpeerreviewmaketitle
+
+
+
+\section{Motivation}
+In the summer of 2008, when Russia's mass media and telecom watchdog Roskomnadzor \footnote{Federal Service for Supervision of Communications, Information Technology and Mass Media (Russian:
+\begin{russian}Федеральная служба по надзору в сфере массовых коммуникаций и связи\end{russian}
+)} was re-established, the Russian Internet, or RuNet, changed  significantly. 
+This Federal Service is regulated and put into motion by two laws, - ``On Protecting Children from Information Harmful to Their Health and Development''\cite{krem1} and ``On Information, Information Technology and Information Protection''\cite{krem2}. 
+Both of them give judges a free hand in decision-making. As a result, a number of websites have been blocked quite chaotically, starting with opposition websites and articles, to Bitcoin communities and GitHub.
+
+\indent Sometimes such censorship systems can case collateral censorship, or damage. 
+They block access to sites from users beyond those intended to protect\cite{anon1}. 
+This projects goal is to examine the effect of such possible collateral censorship to the requests that are originating from outside of Russia, with the possible extension to other countries that maintain the censoring services. 
+The result of this project can be used to create a detailed analysis of collateral damage caused by different types of censoring techniques, and to potentially discover the paths at fault.
+
+\section{Related Work}
+Not a lot of research has been done in the area of the collateral censorship between networks in different countries.
+Partly because the impact of Internet censorship on global Internet service is usually unintended, and the probability of getting any results is fairly small. 
+However, China’s injection of forged DNS responses has been reported to cause large scale collateral damage by blocking outside traffic that traverses Chinese links \cite{anon1}. 
+The analysis shows that in the most extreme case, 70\% of the open resolvers from Korea suffer collateral damage for queries to .de domains. 
+Upstream filtering can also be behind traffic blockage outside of a censoring area due to ISP routing arrangements (for example, the Indian Internet filtering some users in Oman who are not able to access certain webpages \cite{iclab1}).
+
+\section{Censorship tools}
+The Russian Internet Service Providers (ISPs) and government use a number of different censorship techniques to block access to ``unwanted'' websites. 
+Fig. \ref{fig:fig1} shows a chart of the most popular ones by the number of providers that maintain a particular method.
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    ybar,
+    enlargelimits=0.15,
+    legend style={at={(0.5,-0.15)},
+      anchor=north,legend columns=-1},
+    ylabel={\#providers},
+    symbolic x coords={DPI-IP, IP, DPI-FULL, DNS},
+    xtick=data,
+    nodes near coords, 
+	nodes near coords align={vertical},
+    x tick label style={rotate=45,anchor=east},
+    xlabel={Blocking Method},
+    x label style={at={(0.5,-0.25)}}
+    ]
+\addplot coordinates {(DPI-IP,430) (IP,235) (DPI-FULL,125) (DNS, 155)};
+\end{axis}
+\end{tikzpicture}
+\caption{Number of providers that maintain a particular blocking method (DPI-IP - blocking using Deep Packet Inspection (DPI), that checks URL only at a specific IPs and port:80; DPI-FULL - blocking using DPI at every IP and ports; IP - blocking by IP address; DNS - DNS injection)}
+\label{fig:fig1}
+\end{figure}
+
+\section{Resources}
+\indent As a main reference for blacklisted URLs, domain names, and IPs in Russia, we plan to use the service \url{http://antizapret.info} which maintains and persistently updates its catalog. 
+In addition, it also provides an API for external access. 
+
+\begin{lstlisting}[language=json,firstnumber=1,caption={An example of the possible output from requesting
+\url{http://api.antizapret.info/all.php?type=json}}, label=listing1, frame=single] 
+"id":"16971",
+"rsoc_id":"91191193",
+"includeTime":"2015-02-13 11:55:47",
+"rsocDate":"2015-02-04",
+"org":"",
+"org_act":"2/1/11-32425",
+"url":http://chetkiibro.com/,
+"domain":"http://chetkiibro.com/,
+"ip":"104.28.16.89,104.28.17.89",
+"country":"",
+"proof":"http://antizapret.info/site.php?id=16971"
+\end{lstlisting}
+As a reference of the potential victims of the collateral censorship, we are going to use telegraphy maps (Fig. \ref{fig:fig3}), and the map of the supported countries for one of the largest Russian backbone service provider (Fig. \ref{fig:fig2}), concentrating on the bordering countries. 
+
+Also we are using VPNs provided by IP Vanish
+\footnote{\url{https://www.ipvanish.com/}}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=85mm]{routeMap.png}
+\caption{Telegeography Map of the Region \label{teleG}}
+\label{fig:fig3}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=85mm]{figure2.png}
+\caption{RETN's backbone map \label{RetnMap}}
+\label{fig:fig2}
+\end{figure}
+
+
+\section{Research Plan}
+\subsection{Ultimate Plan}
+Our ultimate aim is to write an experiment in the form of Python scripts that will probe websites censored in Russia from various points in neighboring countries. 
+This experiment will not only be able to compare the received web-pages with the blocked ones, but also return the type of the applied censorship technique in case of detected similarity between the received and the blocked web-pages. 
+To collect the source code of blocked web-pages we plan to use our groups own private computer in Russia or a VPN service
+
+In order to create this experiment, we plan to use the following modules:
+\begin{enumerate}
+\item \textbf{urllib} - for network resource access;
+\item \textbf{socket} - to get an access to the BSD socket interface;
+\item \textbf{ssl} - to get an access to Transport Layer Security encryption and peer authentication facilities for network socket;
+\item \textbf{dnspython} - to get an access to high and low levels of DNS. 
+\end{enumerate}
+and, of course, the OpenVPN \footnote{http://openvpn.net/} client to connect to VPN servers. Also we utilize the scripts from Tunnelblick \footnote{https://code.google.com/p/tunnelblick/} for connection setup.
+
+The coarse description of the experiment is the following:
+\begin{enumerate}
+\item Collect a list of URLs and IPs of the censored web-pages from \url{http://antizapret.info};
+\item For each item in the list:
+    \begin{enumerate}
+    \item Request the web-page and compare its source code with the code of actually blocked web-page;
+    \item Test DNS access;
+    \item Test HTTP access.
+    \end{enumerate}
+\end{enumerate}
+
+\subsection{Contingency Plan}
+Given the possibility where no censorship leakage is found, we will restructure the experiment to try and prove our results are accurate, i.e.\  that there is little to no collateral censorship resulting from the Russian government. 
+This will be done by repeating the experiment multiple times at different times of the day, along with expanding our list of candidates for possible collateral censorship to other countries in close proximity geographically and in terms of Internet topology. 
+
+\section{methodology}
+In order to measure possible collateral damage caused by Russian censorship, we conduct an experiment that can be coarsely divided into 3 parts:
+\begin{enumerate}
+\item Set a connection to a VPN server from a list of examined countries.
+\item Access and collect HTML code of web-pages that are blocked in Russia.
+\item Compare the percent of similarity between web-pages access from Russia and outside of it.
+\end{enumerate}
+The overall process is illustrated in Figure 4.
+\begin{figure}[H]
+\centering
+\includegraphics[width=85mm]{diag1.png}
+\caption{Scheme of the experiment \label{diag1}}
+\label{fig:fig4}
+\end{figure}
+
+\subsection{VPN}
+We are using servers provided by IP Vanish.
+According to it's website \footnote{\url{https://www.ipvanish.com/why-vpn.php}}, its servers ``span 25,000+ IPs on 165+ servers in 60+ countries''.
+This is a huge advantage as countries near Russia, like Finland and Estonia, are among countries supported by
+IP Vanish, thus we can investigate the influence of  Russian censorship on its geographical neighbors.
+Also, we are using a computer directly located in Russia to get more accurate result for Russia censorship.
+
+For our VPN client we are using OpenVPN. 
+Basically, we conntect to a OpenVPN server hosted by IP Vanish using configuration files provided by IP Vanish and associated credits.
+Also we are using scripts from Tunnelblick to handle setting-up / tearing-down the connection on Mac OS X systems.
+We are running OpenVPN in daemon mode, communicating with it via a telnet server open locally for management purpose.
+
+\subsection{Data Collection}
+After setting up a connection to a VPN server in a particular country, we access web-pages from a list of censored websites in Russia. To access a this list we use an API from \textbf{AntiZapret}. 
+
+Basically, going through every URL in that list we access and store the respective HTML web-page from each country. 
+
+For the data collection purpose we implemented a special class - \code{CollectData}. Its instance connects to a specified VPN server and performs either collection of a single wep-page, specified by a URL from multiple countries, or collects a list of web-pages, using single VPN connection (Country major vs Website major order).
+This gives us the option of targeting a specific website in a small time windows to minimise differences in time sensitive content. 
+
+After the web-page access attempt, there could be four possible outcomes:
+\begin{enumerate}
+\item An original web-page.
+\item A web-page with a removed part (partial censorship).
+\item A censorship's system brochure web-page.
+\item A failure to load a web-page.
+\end{enumerate}
+In order to deal with the final case, we stop waiting for a response after 8 seconds (Timeout parameter).
+
+%TODO: Add information about data storage
+
+After the data collection procedure, we perform a string by string comparison between web-pages accessed from a VPN server located in Russia, and web-pages accessed from a VPN servers located in a selected list of countries. The result of such comparison is a percentage of similarity between pages. 
+
+\section{Web User Interface}
+To display the results of our tests we will create a Web UI, that will consists of a table with the outcomes of the particular experiment, including URL addresses, URL categories, statuses and explanations. That Web UI will also have an option that will give the user a visual summary for the all conducted experiments. 
+
+\section{Timeline}
+Estimation of progress by week.
+
+\begin{description}[leftmargin=6em,style=nextline]
+\item[2/16 - 2/22] \st{Setup and design}
+\item[2/23 - 3/01] \st{Design Interface Website/Experiment}
+\item[3/02 - 3/08] \st{Code Interface Website/Experiment}
+\item[3/09 - 3/15] \st{Code Interface Website/Experiment}
+\item[3/16 - 3/22] \st{Spring Break/Coding/Debugging}
+\item[3/23 - 3/29] \st{Run Experiment}
+\item[3/30 - 4/05] \st{Run Experiment/Analysis Data}
+\item[4/06 - 4/12] \st{Midterm project Report due}
+\item[4/13 - 4/19] Expand Experiment if needed
+\item[4/20 - 4/26] Create Website for Results
+\item[4/27 - 5/03] Buffer Week
+\item[5/04 - 5/10] Final Project Report Due
+\end{description}
+
+
+\section{Current Issues}
+
+A major obstacle that we are working to overcome is the inconsistency of the censorship from our different viewpoints from \textit{within} Russian borders.
+Using our various VPN subscriptions and a physical computer that we have access to in Russia we are observing different levels of access to certain websites.
+Our PC in Russia is censored in more cases then it is not when testing against the list of target websites.
+Where our VPN service through IP Vanish seems to get through to most of these websites. 
+This may be due to the VPN company purposely fetching these locked websites as this would be a feature that most of its users would want or their servers are falsely labeled as being located in Moscow. 
+We just happen to be in the fringe case of actually wanting to be censored.
+
+We plan on either only collecting Russian samples from our dedicated PC or trying a difference VPN service. 
+An issue may be similar de-censorship in the neighboring countries too, but we do not have dedicated machines in these locations to check. 
+This may lead to a lot of invalid results in the end. 
+
+\section{Future Work}
+
+Currently we plan on focusing on expanding our HTML comparison methods to try and find what type of things are being changed if only parts of webpages are being censored.
+To account for different dynamic content that may change from instance to instance (ads, time dependant information).
+
+We have references to methods of figure printing the type of censorship being used from the Russian ISPs, we would like to integrate this into our project as well. 
+
+Finally we still want to create the website to display our results pending we find proof that is worthy of being published outside of the class. 
+
+
+\begin{thebibliography}{9}
+
+
+\bibitem{anon1}
+  Anonymous,
+  \emph{The Collateral Damage of Internet Censorship by DNS Injection}.
+  SIGCOMM Comput. Commun. Rev., July 2012.
+  
+\bibitem{krem1}
+    \emph{"Law on Protecting Children from Negative and Harmful Information."} President of Russia. N.p., n.d. Web. 14 Feb. 2015. 
+    
+\bibitem{krem2}
+    \emph{Russian Federation: Federal Law No. 149-FZ} of July 24, 2006, on Information, Information Technology and Information Protection (as Amended up to Federal Law No. 398-FZ of December 28, 2013). N.p., n.d. Web. 14 Feb. 2015.
+    
+\bibitem{iclab1}
+C. Lab., 
+    \emph{Routing Gone Wild: Documenting upstream filtering in Oman via India.} Technical report, Citizen Lab, 2012. 
+
+\end{thebibliography}
+
+\end{document}
+
+
