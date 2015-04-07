@@ -28,12 +28,12 @@ def main():
     test_data = WebData()
     html_comparison = HTMLComparison()
 
-    number_of_webpages = 10
+    number_of_webpages = 5
     blocking_country = 'Russia'
 
     # list of countries to explore
     # countries = ['Finland', 'Estonia', 'Latvia', 'Lithuania', 'Belarus', 'Ukraine', 'Kazakhstan', 'Kyrgyzstan', 'Russia']
-    countries = ['Finland', 'Estonia', 'Latvia', 'Russia']
+    countries = ['Finland', 'Estonia', 'Latvia', 'Lithuania', 'Russia']
 
     for country in countries:
         print()
@@ -44,7 +44,6 @@ def main():
             test_data=test_data)
 
     list_of_urls = collect.get_list_of_first_n_urls_from_antizapret(number_of_webpages)
-    print(list_of_urls)
 
     session = False  # means current session
     # session = "2015-03-29_12-47-36"

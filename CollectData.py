@@ -12,7 +12,8 @@ class CollectData:
     # This is the list of manually selected pages that cannot be accessed from the russian VPN server (IPVanish)
     # but they are accessible from the servers outside of Russia
     list_of_definitely_blocked_pages = [{'url': 'http://leonwolf.livejournal.com', 'ip': '208.93.0.190'},
-                                    {'url': 'http://navalny.livejournal.com', 'ip': '208.93.0.190'}]
+                                    {'url': 'http://navalny.livejournal.com', 'ip': '208.93.0.190'},
+                                    {'url': 'https://twitter.com/b0ltai', 'ip': 'idk'}]
 
     def __init__(self):
         # Init Connection Class
