@@ -51,8 +51,9 @@ class CollectData:
             request_a_list_of_blocked_websites = requests.get('http://api.antizapret.info/all.php?type=json')
             # decode the received data
             list_of_blocked_websites = json.loads(request_a_list_of_blocked_websites.text)['register']
+            list_of_n_blocked_websites = list_of_blocked_websites[:number_of_webpages] + self.list_of_definitely_blocked_pages
         # go through websites in the list
-        for blocked_website in list_of_blocked_websites[:number_of_webpages]:  # first n results
+        for blocked_website in list_of_n_blocked_websites:  # first n results
             blocked_url = blocked_website['url']
             html_code_of_the_page = requests.get(blocked_url, timeout=8).text  # timeout = 8 seconds
 
