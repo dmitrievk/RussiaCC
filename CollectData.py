@@ -26,18 +26,19 @@ class CollectData:
                                                   country_id = None,
                                                   number_of_webpages = -1,
                                                   use_manually_selected_list = False,
-                                                  test_data = None
+                                                  test_data = None,
+                                                  list_of_urls_to_gather = []
     ):
         # open the connection using countryID
         print('IP before using VPN', Connection.get_ip())
 
-        # if country_id is not None:
-        #     connection = Connection.IPVanishConnection(country_id)
-        # else:
-        #     connection = Connection.DirectConnection()
-        #     country_id = 'SampleCountry'
+        if country_id is not None:
+            connection = Connection.IPVanishConnection(country_id)
+        else:
+            connection = Connection.DirectConnection()
+            country_id = 'SampleCountry'
 
-        connection = Connection.DirectConnection()
+        # connection = Connection.DirectConnection()
 
         print('connecting...')
         connection.connect()
@@ -48,14 +49,19 @@ class CollectData:
         if use_manually_selected_list:
             list_of_blocked_websites = self.list_of_definitely_blocked_pages
         else:
-            request_a_list_of_blocked_websites = requests.get('http://api.antizapret.info/all.php?type=json')
-            # decode the received data
-            list_of_blocked_websites = json.loads(request_a_list_of_blocked_websites.text)['register']
-            list_of_n_blocked_websites = list_of_blocked_websites[:number_of_webpages] + self.list_of_definitely_blocked_pages
+            # request_a_list_of_blocked_websites = requests.get('http://api.antizapret.info/all.php?type=json')
+            # # decode the received data
+            # list_of_blocked_websites = json.loads(request_a_list_of_blocked_websites.text)['register']
+            # list_of_n_blocked_websites = list_of_blocked_websites[:number_of_webpages] + self.list_of_definitely_blocked_pages
+            list_of_n_blocked_websites = list_of_urls_to_gather + self.list_of_definitely_blocked_pages
         # go through websites in the list
         for blocked_website in list_of_n_blocked_websites:  # first n results
             blocked_url = blocked_website['url']
-            html_code_of_the_page = requests.get(blocked_url, timeout=8).text  # timeout = 8 seconds
+            try:
+                html_code_of_the_page = requests.get(blocked_url, timeout=2).text  # timeout = 8 seconds
+            except requests.exceptions.RequestException as e:
+                print(e)
+                html_code_of_the_page = ''
 
             if html_code_of_the_page == '':
                 html_code_of_the_page = "None"

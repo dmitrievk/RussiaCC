@@ -44,7 +44,7 @@ class WebData:
             name = valid_file_name(name)
 
         # get the home dir (user dir in windows, home in unix)
-        self.homeDir = expanduser("~")
+        self.homeDir = os.path.join(expanduser("~"), 'RussiaCCData')#expanduser("~") + ''
 
         # combine the strings in a way that is cross platform
         self.nameDir = os.path.join(self.homeDir, name)
