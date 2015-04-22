@@ -13,7 +13,8 @@ class CollectData:
     # but they are accessible from the servers outside of Russia
     list_of_definitely_blocked_pages = [{'url': 'http://leonwolf.livejournal.com', 'ip': '208.93.0.190'},
                                     {'url': 'http://navalny.livejournal.com', 'ip': '208.93.0.190'},
-                                    {'url': 'https://twitter.com/b0ltai', 'ip': 'idk'}]
+                                    {'url': 'https://twitter.com/b0ltai', 'ip': 'idk'},
+                                    {'url': 'http://betway.com', 'ip': 'idk'}]
 
     def __init__(self):
         # Init Connection Class
@@ -53,7 +54,7 @@ class CollectData:
             # # decode the received data
             # list_of_blocked_websites = json.loads(request_a_list_of_blocked_websites.text)['register']
             # list_of_n_blocked_websites = list_of_blocked_websites[:number_of_webpages] + self.list_of_definitely_blocked_pages
-            list_of_n_blocked_websites = list_of_urls_to_gather + self.list_of_definitely_blocked_pages
+            list_of_n_blocked_websites = list_of_urls_to_gather
         # go through websites in the list
         for blocked_website in list_of_n_blocked_websites:  # first n results
             blocked_url = blocked_website['url']
