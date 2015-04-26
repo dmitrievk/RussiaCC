@@ -34,8 +34,10 @@ class CollectData:
         # open the connection using countryID
         print('IP before using VPN', Connection.get_ip())
 
+        # if country_id is not None:
+        #     connection = Connection.IPVanishConnection(country_id)
         if country_id is not None:
-            connection = Connection.IPVanishConnection(country_id)
+            connection = Connection.ExpressConnection(country_id)
         else:
             connection = Connection.DirectConnection()
             country_id = 'SampleCountry'

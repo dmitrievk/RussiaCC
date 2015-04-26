@@ -80,6 +80,7 @@ from .Connection import Connection
 from .DirectConnection import DirectConnection
 from .OpenVPNConnection import OpenVPNConnection, OpenVPNException
 from .IPVanishConnection import IPVanishConnection, IPVanishException, NoSuchCountryException
+from .ExpressConnection import ExpressConnection, ExpressException, NoSuchCountryException
 from .Util import get_ip
 
 

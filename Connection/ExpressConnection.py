@@ -32,7 +32,6 @@ class ExpressConnection(OpenVPNConnection):
                                           'Countries Available': mapping.keys()})
 
         super().__init__(cd=express_dir,
-                         auth=join(express_dir, 'ipvanishcredits.txt'),
                          config=join(express_dir, mapping[country]),
                          management_port=1337,
                          up_script='"%s%s"' % (

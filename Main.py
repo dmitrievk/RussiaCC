@@ -38,8 +38,8 @@ def main():
         # countries = ['Finland', 'Estonia', 'Latvia', 'Lithuania', 'Belarus', 'Ukraine', 'Kazakhstan', 'Kyrgyzstan',
         #             'Russia']
 
-        # list of countries to explore for ipVanish
-        countries = ['Azerbaijan', 'Finland', 'Estonia', 'Georgia', 'Latvia', 'Lithuania', 'Uzbekistan', 'Ukraine', 'Kazakhstan', 'Kyrgyzstan', 'Mongolia', 'Russia']
+        # list of countries to explore for ipVanish 'Uzbekistan',
+        countries = ['Azerbaijan', 'Finland', 'Estonia', 'Georgia', 'Latvia', 'Lithuania', 'Ukraine', 'Kazakhstan', 'Kyrgyzstan', 'Mongolia', 'Russia']
 
         # countries = ['Finland', 'Russia']#['Finland', 'Estonia', 'Latvia', 'Lithuania', 'Russia']
 

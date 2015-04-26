@@ -43,21 +43,35 @@ class OpenVPNConnection(Connection):
             """
 
             # set up
-
-            call_line = ' '.join([
-                'openvpn',
-                '--daemon',
-                '--cd', self.cd,
-                '--config', self.config,
-                '--cd', self.cd,
-                '--auth-user-pass', self.auth,
-                '--management', '127.0.0.1', str(self.management_port),
-                '--management-query-passwords',
-                '--management-hold',
-                '--script-security', '2'
-                '--up', self.up_script,
-                '--down', self.down_script,
-            ])
+            if hasattr(self, 'auth'):
+                call_line = ' '.join([
+                    'openvpn',
+                    '--daemon',
+                    '--cd', self.cd,
+                    '--config', self.config,
+                    '--cd', self.cd,
+                    '--auth-user-pass', self.auth,
+                    '--management', '127.0.0.1', str(self.management_port),
+                    '--management-query-passwords',
+                    '--management-hold',
+                    '--script-security', '2'
+                    '--up', self.up_script,
+                    '--down', self.down_script,
+                ])
+            else:
+                call_line = ' '.join([
+                    'openvpn',
+                    '--daemon',
+                    '--cd', self.cd,
+                    '--config', self.config,
+                    '--cd', self.cd,
+                    '--management', '127.0.0.1', str(self.management_port),
+                    '--management-query-passwords',
+                    '--management-hold',
+                    '--script-security', '2'
+                    '--up', self.up_script,
+                    '--down', self.down_script,
+                ])
 
             #print('Run VPN: call_line:')
             #print(call_line)
