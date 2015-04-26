@@ -1,0 +1,12 @@
+Azerbaijan,azerbaijan-cluster1.expressnetwork.net,my_expressvpn_azerbaijan_udp.ovpn
+Finland,finland-cluster1.expressnetwork.net,my_expressvpn_finland_udp.ovpn
+Estonia,estonia-cluster1.expressnetwork.net,my_expressvpn_estonia_udp.ovpn
+Georgia,georiga-cluster1.expressnetwork.net,my_expressvpn_georgia_udp.ovpn
+Latvia,latvia-cluster1.expressnetwork.net,my_expressvpn_latvia_udp.ovpn
+Lithuania,lithuania-cluster1.expressnetwork.net,my_expressvpn_lithuania_udp.ovpn
+Uzbekistan,uzbekistan-cluster1.expressnetwork.net,my_expressvpn_uzbekistan_udp.ovpn
+Ukraine,ukraine-cluster1.expressnetwork.net,my_expressvpn_ukraine_udp.ovpn
+Kazakhstan,kazakhstan-cluster1.expressnetwork.net,my_expressvpn_kazakhstan_udp.ovpn
+Kyrgyzstan,kyrgyzstan-cluster1.expressnetwork.net,my_expressvpn_kyrgyzstan_udp.ovpn
+Mongolia,mongolia-cluster1.expressnetwork.net,my_expressvpn_mongolia_udp.ovpn
+Russia,russia-cluster1.expressnetwork.net,my_expressvpn_russia_udp.ovpn
