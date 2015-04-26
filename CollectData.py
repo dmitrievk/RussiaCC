@@ -29,7 +29,8 @@ class CollectData:
                                                   use_manually_selected_list = False,
                                                   test_data = None,
                                                   list_of_urls_to_gather = []
-    ):
+                                                  ):
+
         # open the connection using countryID
         print('IP before using VPN', Connection.get_ip())
 

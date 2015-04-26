@@ -34,9 +34,13 @@ def main():
         number_of_webpages = 6
         blocking_country = 'Russia'
 
-        # list of countries to explore
-        countries = ['Finland', 'Estonia', 'Latvia', 'Lithuania', 'Belarus', 'Ukraine', 'Kazakhstan', 'Kyrgyzstan',
-                     'Russia']
+        # list of countries to explore for ipVanish
+        # countries = ['Finland', 'Estonia', 'Latvia', 'Lithuania', 'Belarus', 'Ukraine', 'Kazakhstan', 'Kyrgyzstan',
+        #             'Russia']
+
+        # list of countries to explore for ipVanish
+        countries = ['Azerbaijan', 'Finland', 'Estonia', 'Georgia', 'Latvia', 'Lithuania', 'Uzbekistan', 'Ukraine', 'Kazakhstan', 'Kyrgyzstan', 'Mongolia', 'Russia']
+
         # countries = ['Finland', 'Russia']#['Finland', 'Estonia', 'Latvia', 'Lithuania', 'Russia']
 
         for country in countries:
