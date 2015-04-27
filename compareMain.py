@@ -12,7 +12,7 @@ dict_of_results = {'TestURL1': {'Country1': 0}}  # {'url1': {'country1': result,
 def create_dict_of_results_and_save(path):
     list_of_folders_of_tests = os.listdir(path)
 
-    for i in range(0, len(list_of_folders_of_tests)):  #for each test (right now for only one)
+    for i in range(0, len(list_of_folders_of_tests)):  #for each test
         test_i = list_of_folders_of_tests[i]
         print(test_i)
         countries = os.listdir(os.path.join(expanduser("~"), 'RussiaCCData', test_i))
