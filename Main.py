@@ -6,7 +6,8 @@ import csv
 
 
 __author__ = 'Jesse konstantindmitriev'
-
+countries = ['Finland', 'Estonia', 'Latvia', 'Lithuania', 'Belarus', 'Ukraine', 'Kazakhstan', 'Kyrgyzstan',
+                     'Russia']
 
 def main():
     collect = CollectData()
@@ -35,8 +36,8 @@ def main():
         blocking_country = 'Russia'
 
         # list of countries to explore
-        countries = ['Finland', 'Estonia', 'Latvia', 'Lithuania', 'Belarus', 'Ukraine', 'Kazakhstan', 'Kyrgyzstan',
-                     'Russia']
+        # countries = ['Finland', 'Estonia', 'Latvia', 'Lithuania', 'Belarus', 'Ukraine', 'Kazakhstan', 'Kyrgyzstan',
+        #              'Russia']
         # countries = ['Finland', 'Russia']#['Finland', 'Estonia', 'Latvia', 'Lithuania', 'Russia']
 
         for country in countries:
