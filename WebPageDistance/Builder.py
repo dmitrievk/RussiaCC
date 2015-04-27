@@ -8,7 +8,7 @@ def WebPageDistance(**kwargs):
         assert type(p1) == str
         assert type(p2) == str
 
-        metric = kwargs.get('distance', 'lcs')
+        metric = kwargs.get('metric', 'lcs')
 
         if metric == 'lcs':
             return lcs(p1, p2) / max(1, len(p1) + len(p2))
