@@ -85,7 +85,7 @@ class WebData:
 
         return []
 
-    # gets a dictionary of all of the examples (from current session) of a single webpage, the dictionary key are the vpn names
+    # returns a dictionary of all of the examples (from current session) of a single webpage,  dictionary's keys are the vpn names
     def get_all_webpages(self, address):
         out = {}
 

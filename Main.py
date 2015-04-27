@@ -6,7 +6,8 @@ import csv
 
 
 __author__ = 'Jesse konstantindmitriev'
-
+countries = ['Finland', 'Estonia', 'Latvia', 'Lithuania', 'Belarus', 'Ukraine', 'Kazakhstan', 'Kyrgyzstan',
+                     'Russia']
 
 def main():
     collect = CollectData()
@@ -33,6 +34,7 @@ def main():
 
         number_of_webpages = 6
         blocking_country = 'Russia'
+
 
         # list of countries to explore for ipVanish
         # countries = ['Finland', 'Estonia', 'Latvia', 'Lithuania', 'Belarus', 'Ukraine', 'Kazakhstan', 'Kyrgyzstan',
