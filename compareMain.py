@@ -4,6 +4,7 @@ import csv
 from os.path import expanduser
 import os
 from WebPageDistance import WebPageDistance
+# from alignment import needle
 from Main import countries
 
 dict_of_results = {'TestURL1': {'Country1': 0}}  # {'url1': {'country1': result, ..}, .. } for each test
