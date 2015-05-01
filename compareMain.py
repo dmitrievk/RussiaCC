@@ -24,7 +24,7 @@ def create_dict_of_results_and_save(path):
                 file = os.path.join(os.path.join(expanduser("~"), 'RussiaCCData', test_i, country, html_page))
                 if os.path.isfile(file):
                     with open(file, "r") as f:
-                        content = f.readlines()
+                        content = f.read()
                     temp_dict[country] = content
 
                     try:
@@ -40,10 +40,10 @@ def create_dict_of_results_and_save(path):
         scores = {}  #{'url1': {'country1': result, ..}, .. } for each test
         # for country in countries:
         for url in dict_of_results.keys():
-            russian_page = dict_of_results[url]['Russia'][0]
+            russian_page = dict_of_results[url]['Russia']
             temp_dict = {}
             for country in countries:
-                current_page = dict_of_results[url][country][0]
+                current_page = dict_of_results[url][country]
                 temp_dict[country] = scorer(russian_page, current_page)
             scores[url] = temp_dict
 
