@@ -1,4 +1,5 @@
 __author__ = 'konstantindmitriev'
+import time
 
 import csv
 from os.path import expanduser
@@ -16,6 +17,7 @@ def create_dict_of_results_and_save(path):
     for i in range(0, len(list_of_folders_of_tests)):  #for each test
         test_i = list_of_folders_of_tests[i]
         print(test_i)
+        t0 = time.clock()
         countries = os.listdir(os.path.join(expanduser("~"), 'RussiaCCData', test_i))
         for country in countries:
             html_pages = os.listdir(os.path.join(expanduser("~"), 'RussiaCCData', test_i, country))
@@ -39,7 +41,10 @@ def create_dict_of_results_and_save(path):
         scorer = WebPageDistance(metric='shift3b', max_offset=65)
         scores = {}  #{'url1': {'country1': result, ..}, .. } for each test
         # for country in countries:
+        count = 1
         for url in dict_of_results.keys():
+            print("Done: %3.2f%%..." % (count * 100 / len(dict_of_results.keys())))
+            count = count + 1
             russian_page = dict_of_results[url]['Russia']
             temp_dict = {}
             for country in countries:
@@ -52,6 +57,7 @@ def create_dict_of_results_and_save(path):
         for url in dict_of_results.keys():
             for country in countries:
                 w.writerow([url, country, scores[url][country]])
+        print(time.clock() - t0, "seconds")
 
 
 
