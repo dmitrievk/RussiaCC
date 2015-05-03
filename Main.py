@@ -32,7 +32,7 @@ def main():
         test_data = WebData()
         html_comparison = HTMLComparison()
 
-        number_of_webpages = 6
+        number_of_webpages = 140
         blocking_country = 'Russia'
 
 

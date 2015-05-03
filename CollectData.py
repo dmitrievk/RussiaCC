@@ -5,21 +5,27 @@ import requests
 import json
 from WebData import WebData
 import Connection
-
+import csv
+from os.path import dirname, realpath, join
 
 class CollectData:
     # Russian providers do not block every page from the register
     # This is the list of manually selected pages that cannot be accessed from the russian VPN server (IPVanish)
     # but they are accessible from the servers outside of Russia
-    list_of_definitely_blocked_pages = [{'url': 'http://leonwolf.livejournal.com', 'ip': '208.93.0.190'},
-                                    {'url': 'http://navalny.livejournal.com', 'ip': '208.93.0.190'},
-                                    {'url': 'https://twitter.com/b0ltai', 'ip': 'idk'},
-                                    {'url': 'http://betway.com', 'ip': 'idk'}]
+    list_of_definitely_blocked_pages = [] ##[{'url': 'http://leonwolf.livejournal.com', 'ip': '208.93.0.190'},
+    # {'url': 'http://navalny.livejournal.com', 'ip': '208.93.0.190'},
+    # {'url': 'https://twitter.com/b0ltai', 'ip': 'idk'},
+    # {'url': 'http://betway.com', 'ip': 'idk'}]
+
 
     def __init__(self):
         # Init Connection Class
         # self.connection = Connection()
         # Init SaveData Class
+        project_dir = dirname(realpath(__file__))
+        iclab_urls_file = join(project_dir, 'ru2.csv')
+        for url, category_short, category_long, date, source, notes in csv.reader(open(iclab_urls_file)):
+            self.list_of_definitely_blocked_pages.append({'url': url})
         pass
 
     # access multiple webpages from a single country
