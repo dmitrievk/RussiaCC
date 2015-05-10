@@ -321,7 +321,7 @@ pages. Therefore, Our algorithm should be sensitive to a fully change
 page, but meanwhile insensitive to block changes, especially those small
 ones.</p>
 
-<p>\\( F_{0\dots n, 0\dots m} \gets 0 \\) \\( F_{n,m} \\)</p>
+<p> \( F_{0\dots n, 0\dots m} \gets 0 \)   \( F_{n,m} \) </p>
 
 <p>We hereby propose the use of Longest Common Subsequence, or LCS, for
 scoring. LCS is a good metric for HTML file comparison, because it is
@@ -329,20 +329,20 @@ relatively robust to block-wise content change, which means a DOM tree
 node is replaced by another one, while preseving other parts of the
 tree. The algorithm for LCS is detailed on Algorithm [algo:lcs]. More
 precisely, we use the following scoring formula:
-\\[ Score(s_1,s_2) = \frac{LCS(s_1,s_2)}{Len(s_1)+Len(s_2)} \\] to ensure
+ \[ Score(s_1,s_2) = \frac{LCS(s_1,s_2)}{Len(s_1)+Len(s_2)} \]  to ensure
 that our similarity metric would not prefer longer/shorter web pages.
 This metric means that a larger score means larger degree of similarity,
 also the score is constrainted in a given range
-(\\( 0\leq score \leq 0.5 \\), so the results are comparable for all page
+( \( 0\leq score \leq 0.5 \) , so the results are comparable for all page
 length.</p>
 
 <p>However, a plain implementation of LCS is time-consuming: It requires
-\\( O(n m) \\) time to compute where \\( n \\) and \\( m \\) are lengths of two strings,
+ \( O(n m) \)  time to compute where  \( n \)  and  \( m \)  are lengths of two strings,
 respectively. This is insufficient for HTML comparison because the
-average size of contemporary pages has already excessed \\( 1.6 \\) million
-bits<a href="http://www.websiteoptimization.com/speed/tweak/average-web-page/">^6</a>, or \\( 200 \\) kilo-bytes.</p>
+average size of contemporary pages has already excessed  \( 1.6 \)  million
+bits<a href="http://www.websiteoptimization.com/speed/tweak/average-web-page/">^6</a>, or  \( 200 \)  kilo-bytes.</p>
 
-<p>\\( i \gets 1 \\) \\( j \gets 1 \\) \\( lcs \gets 0 \\) \\( F_{n,m} \\)</p>
+<p> \( i \gets 1 \)   \( j \gets 1 \)   \( lcs \gets 0 \)   \( F_{n,m} \) </p>
 
 <p>This means that we should need to use some algorithm which is more
 efficient. One of such an algorithm we are using is Sift3b @sift3b,
@@ -350,12 +350,12 @@ which is an approximate algorithm with speed optimizations, as shown on
 Algorithm [algo:sift3b].</p>
 
 <p>Sift3b approximate the longest common subsequence by setting an
-parameter \\( O \\), or max offset, and ignoring attempts to matching
+parameter  \( O \) , or max offset, and ignoring attempts to matching
 characters whose offset is larger than max offset. This means the
-running time of Sift3b is \\( O( (n+m) O) \\) where \\( n \\) and \\( m \\) are lengths of
+running time of Sift3b is  \( O( (n+m) O) \)  where  \( n \)  and  \( m \)  are lengths of
 two strings, respectively. This means we can have some kind of
 trade-off, because a larger max offset means better approximation and
-slower running time. For our problem, we choose \\( O=130 \\) for a balance
+slower running time. For our problem, we choose  \( O=130 \)  for a balance
 between accuracy and running time.</p>
 
 <h1>
@@ -366,12 +366,12 @@ we measure the possibility of some country being affected by the
 collateral censorship by analyzing the data, same 141 webpages, but
 accessed from the USA. We ran the comparing algorithm once again,
 calculated the score for every page accessed from the USA, estimated the
-mean \\( \mu^{USA} \\) and the standard deviation \\( \sigma^{USA} \\). Then, we
+mean  \( \mu^{USA} \)  and the standard deviation  \( \sigma^{USA} \) . Then, we
 assume, that if some country has a mean value which is more than the
 mean value for the USA, then there is a high chance of the censorship
 leakage from Russia:
-\\[ \mu^{country} &gt; \mu^{USA} + k<em>\sigma^{USA} - country\ is\ affected \\]\
-\\[ \mu^{country} \leq \mu^{USA} + k</em>\sigma^{USA} - country\ is\ not\ affected \\]</p>
+ \[ \mu^{country} &gt; \mu^{USA} + k<em>\sigma^{USA} - country\ is\ affected \] \
+ \[ \mu^{country} \leq \mu^{USA} + k</em>\sigma^{USA} - country\ is\ not\ affected \] </p>
 
 <p>For the final step, we’ve collected more than 25000 webpages, using
 IPVanish and ExpressVPN servers, the results are presented in
