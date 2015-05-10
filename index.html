@@ -339,7 +339,7 @@ relatively robust to block-wise content change, which means a DOM tree
 node is replaced by another one, while preseving other parts of the
 tree. The algorithm for LCS is detailed on Algorithm [algo:lcs]. More
 precisely, we use the following scoring formula:
- \[ Score(s_1,s_2) = \frac{LCS(s_1,s_2)}{Len(s_1)+Len(s_2)} \]  to ensure
+ \\[ Score(s_1,s_2) = \frac{LCS(s_1,s_2)}{Len(s_1)+Len(s_2)} \\]  to ensure
 that our similarity metric would not prefer longer/shorter web pages.
 This metric means that a larger score means larger degree of similarity,
 also the score is constrainted in a given range
