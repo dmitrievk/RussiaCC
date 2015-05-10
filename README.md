@@ -14,12 +14,6 @@ Stony Brook University CSE 534
 - Python Requests Library 
     - http://docs.python-requests.org/
 - Your own VPN service that supports the OpenVPN protocol
-    - We use ipVanish https://www.ipvanish.com/
+    - We use ipVanish and ExpressVPN
 
-## Major Milestones 
-- 2/15 - Project Genesis 
-- 2/16 - Project Proposal Posted in Documentation 
-- 3/17-25 - Beta of core code
-- 3/28 - Full data connection functionaly implemented
-- 3/29 - Inital results based off of sumple comparison methods. 
 
