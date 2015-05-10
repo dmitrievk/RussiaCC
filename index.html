@@ -99,15 +99,8 @@ number of different censorship techniques to block access to “unwanted”
 websites. Fig. [fig:fig1] shows a chart of the most popular ones by the
 number of providers that maintain a particular method.</p>
 
-<p>[ ybar, enlargelimits=0.15, legend
-style=at=(0.5,-0.15), anchor=north,legend
-columns=-1, ylabel=#providers, symbolic x
-coords=DPI-IP, IP, DPI-FULL, DNS, xtick=data, nodes near
-coords, nodes near coords align=vertical, x tick label
-style=rotate=45,anchor=east, xlabel=Blocking
-Method, x label style=at=(0.5,-0.25) ]
-coordinates (DPI-IP,430) (IP,235) (DPI-FULL,125) (DNS,
-155);</p>
+<p><img src="blocking.PNG" alt='censorship techniques [teleG]&lt;span
+data-label="fig:fig3"&gt;&lt;/span&gt;'></p>
 
 <h1>
 <a id="resources" class="anchor" href="#resources" aria-hidden="true"><span class="octicon octicon-link"></span></a>Resources</h1>
@@ -275,25 +268,19 @@ outcomes:</p>
 
 <ol>
 <li><p>An original web-page.</p></li>
-<li><p>A web-page with a removed part (partial censorship,
-Figure [fig:partial]).</p></li>
-<li><p>A censorship’s system brochure web-page (Figure [fig:brochure]).</p></li>
+<li><p>A web-page with a removed part.</p></li>
+<p><img src="twi1.png" alt='Example of the partial censorship&lt;span
+data-label="fig:partial"&gt;&lt;/span&gt;' title="fig:"></p>
+<p><img src="twi2.png" alt='Example of the partial censorship&lt;span
+data-label="fig:partial"&gt;&lt;/span&gt;' title="fig:"></p>
+<li><p>A censorship’s system brochure web-page.</p></li>
+<p><img src="azartplay-kyrgystan.png" alt='Example of provider’s brochure page&lt;span
+data-label="fig:brochure"&gt;&lt;/span&gt;'></p>
 <li><p>A failure to load a web-page.</p></li>
 </ol>
 
 <p>In order to deal with the final case, we stop waiting for a response
 after 2 seconds (Timeout parameter).</p>
-
-<p><img src="azartplay-kyrgystan.png" alt='Example of provider’s brochure page&lt;span
-data-label="fig:brochure"&gt;&lt;/span&gt;'></p>
-
-<p>0.3 <img src="twi1.png" alt='Example of the partial censorship&lt;span
-data-label="fig:partial"&gt;&lt;/span&gt;' title="fig:"></p>
-
-<p>\</p>
-
-<p>0.3 <img src="twi2.png" alt='Example of the partial censorship&lt;span
-data-label="fig:partial"&gt;&lt;/span&gt;' title="fig:"></p>
 
 <h2>
 <a id="web-page-comparison" class="anchor" href="#web-page-comparison" aria-hidden="true"><span class="octicon octicon-link"></span></a>Web Page Comparison</h2>
@@ -370,8 +357,8 @@ mean  \( \mu^{USA} \)  and the standard deviation  \( \sigma^{USA} \) . Then, we
 assume, that if some country has a mean value which is more than the
 mean value for the USA, then there is a high chance of the censorship
 leakage from Russia:
- \[ \mu^{country} &gt; \mu^{USA} + k<em>\sigma^{USA} - country\ is\ affected \] \
- \[ \mu^{country} \leq \mu^{USA} + k</em>\sigma^{USA} - country\ is\ not\ affected \] </p>
+\[ \mu^{country} &gt; \mu^{USA} + k\sigma^{USA} - country\ is\ affected \]
+\[ \mu^{country} \leq \mu^{USA} + k\sigma^{USA} - country\ is\ not\ affected \] </p>
 
 <p>For the final step, we’ve collected more than 25000 webpages, using
 IPVanish and ExpressVPN servers, the results are presented in
@@ -384,27 +371,8 @@ the censorship leakage only from IPVanish vantage points. The possible
 explanation is that ExpressVPN circumvents the censorship on its own,
 since that’s what most of their users would want.</p>
 
-<p>[ ybar, ymin=0.6, enlargelimits=0.15, legend
-style=at=(0.5,-0.3), anchor=north,legend
-columns=-1, ylabel=Score, symbolic x
-coords=Azerbaijan, Belarus, Finland, Estonia, Georgia, Latvia,
-Lithuania, Ukraine, Kazakhstan, Kyrgyzstan, Mongolia, Russia,
-USA, xtick=data, ybar=3pt, bar width=1 nodes near coords, nodes
-near coords align=vertical, every node near coord/.append
-style=rotate=90, anchor=west, x tick label
-style=rotate=45,anchor=east, x label
-style=at=(0.5,-0.25) ] coordinates
-(Azerbaijan,0) (Belarus,0.803) (Kazakhstan,0.728) (Finland,0.764)
-(Lithuania,0.806) (Kyrgyzstan,0.766) (Ukraine,0.814) (Latvia,0.784)
-(Estonia,0.8) (Russia,1.0) (Georgia,0) (Mongolia,0) (USA, 0);
-coordinates (Finland,0.702) (Belarus,0) (Lithuania,0.71)
-(Kyrgyzstan,0.735) (Ukraine,0.736) (Latvia,0.724) (Estonia,0.742)
-(Russia,1.0) (Kazakhstan,0.720) (Azerbaijan,0.722) (Mongolia,0.720)
-(Georgia,0.732) (USA, 0); +[error bars/.cd,y dir=both,y explicit]
-coordinates (USA, 0.717) +- (USA, 0.073);</p>
-
-<p>(rel axis cs:0,0 |- axis cs:Belarus,0.79) –
-(axis cs:USA,0.79 -| rel axis cs:1,0);</p>
+<p><img src="results.PNG" alt='Results [teleG]&lt;span
+data-label="fig:fig3"&gt;&lt;/span&gt;'></p>
 
 <h1>
 <a id="current-issues" class="anchor" href="#current-issues" aria-hidden="true"><span class="octicon octicon-link"></span></a>Current Issues</h1>
@@ -441,7 +409,8 @@ information).</p>
 being used from the Russian ISPs, we would like to integrate this into
 our project as well.</p>
 
-<p>9</p>
+<h1>
+<a id="References" class="anchor" href="#References" aria-hidden="true"><span class="octicon octicon-link"></span></a>References</h1>
 
 <p>Anonymous, <em>The Collateral Damage of Internet Censorship by DNS
 Injection</em>. SIGCOMM Comput. Commun. Rev., July 2012.</p>
@@ -461,13 +430,6 @@ India.</em> Technical report, Citizen Lab, 2012.</p>
 Sift3</em>, Web post, accessed at May 1, 2015, available at\
 <a href="http://siderite.blogspot.com/2007/04/super-fast-and-accurate-string-distance.html">http://siderite.blogspot.com/2007/04/super-fast-and-accurate-string-distance.html</a>.</p>
 
-<p>[^1]: Federal Service for Supervision of Communications, Information
-    Technology and Mass Media (Russian:</p>
-
-<pre><code>Федеральная служба по надзору в сфере массовых коммуникаций и связи
-
-)
-</code></pre>
         </section>
 
         <footer>
