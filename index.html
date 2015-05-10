@@ -56,18 +56,18 @@ censors various websites and Internet sources based on various reasons.</p>
 <a id="motivation" class="anchor" href="#motivation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Motivation</h1>
 
 <p>In the summer of 2008, when Russia’s mass media and telecom watchdog
-Roskomnadzor [^1] was re-established, the Russian Internet, or RuNet,
+Roskomnadzor was re-established, the Russian Internet, or RuNet,
 changed significantly. This Federal Service is regulated and put into
-motion by two laws, - “On Protecting Children from Information Harmful
-to Their Health and Development”@krem1 and “On Information, Information
-Technology and Information Protection”@krem2. Both of them give judges a
+motion by two laws, "On Protecting Children from Information Harmful
+to Their Health and Development" and "On Information, Information
+Technology and Information Protection". Both of them give judges a
 free hand in decision-making. As a result, a number of websites have
 been blocked quite chaotically, starting with opposition websites and
 articles, to Bitcoin communities and GitHub.</p>
 
 <p>Sometimes such censorship systems can case collateral censorship, or
-damage. They block access to sites from users beyond those intended to
-<a href="mailto:protect@anon1">protect@anon1</a>. This projects goal is to examine the effect of such
+damage. They block access to sites from users beyond those intended to protect.
+This projects goal is to examine the effect of such
 possible collateral censorship to the requests that are originating from
 outside of Russia, with the possible extension to other countries that
 maintain the censoring services. The result of this project can be used
@@ -84,19 +84,20 @@ impact of Internet censorship on global Internet service is usually
 unintended, and the probability of getting any results is fairly small.
 However, China’s injection of forged DNS responses has been reported to
 cause large scale collateral damage by blocking outside traffic that
-traverses Chinese links <a href="https://github.com/anon1" class="user-mention">@anon1</a>. The analysis shows that in the most
-extreme case, 70% of the open resolvers from Korea suffer collateral
+traverses Chinese links.
+The analysis shows that in the most
+extreme case, \(70\%\) of the open resolvers from Korea suffer collateral
 damage for queries to .de domains. Upstream filtering can also be behind
 traffic blockage outside of a censoring area due to ISP routing
 arrangements (for example, the Indian Internet filtering some users in
-Oman who are not able to access certain webpages @iclab1).</p>
+Oman who are not able to access certain webpages).</p>
 
 <h1>
 <a id="censorship-tools" class="anchor" href="#censorship-tools" aria-hidden="true"><span class="octicon octicon-link"></span></a>Censorship tools</h1>
 
 <p>The Russian Internet Service Providers (ISPs) and government use a
 number of different censorship techniques to block access to “unwanted”
-websites. Fig. [fig:fig1] shows a chart of the most popular ones by the
+websites. The following figure shows a chart of the most popular ones by the
 number of providers that maintain a particular method.</p>
 
 <p><img src="blocking.PNG" alt='censorship techniques [teleG]&lt;span
@@ -136,9 +137,9 @@ blocked only in Russia. This procedure reduced the size of the Russian
 list down to 141 URLs.</p>
 
 <p>As a reference of the potential victims of the collateral censorship, we
-use telegraphy maps (Fig. [fig:fig3]), and the map of the supported
-countries for one of the largest Russian backbone service provider (Fig.
-[fig:fig2]), concentrating on the bordering countries.</p>
+use telegraphy maps and the map of the supported
+countries for one of the largest Russian backbone service provider,
+concentrating on the bordering countries.</p>
 
 <p>Also we are using VPNs provided by IP Vanish <a href="https://www.ipvanish.com/">^2</a></p>
 
@@ -243,7 +244,7 @@ via a telnet server open locally for management purpose.</p>
 <a id="data-collection" class="anchor" href="#data-collection" aria-hidden="true"><span class="octicon octicon-link"></span></a>Data Collection</h2>
 
 <p>The high-level description of the data collection algorithm is presented
-in pseudocode on Algorithm [algo:highlevel].</p>
+in pseudocode on Algorithm.</p>
 
 <pre><code>
 DataCollection(ListOfCountries, ListOfURLs)
@@ -330,7 +331,7 @@ for i ← 1 to n do
     end
   end
 end
-return Fn,m
+return F[n,m]
 </code></pre>
 
 <p>We hereby propose the use of Longest Common Subsequence, or LCS, for
@@ -354,6 +355,7 @@ average size of contemporary pages has already excessed  \( 1.6 \)  million
 bits<a href="http://www.websiteoptimization.com/speed/tweak/average-web-page/">^6</a>, or  \( 200 \)  kilo-bytes.</p>
 
 <pre><code>
+Sift3b Algorithm
 Data: Two strings S[1...n] and T[1...m], and O, the maximum offset
 Result: Approximate length of longest common subsequence of S and T, with respect to maximum offset O
 
@@ -364,7 +366,7 @@ i ← 1;
 j ← 1;
 lcs ← 0;
 while i ≤ n and j ≤ m do
-  if Si = Tj then
+  if S[i] = T[j] then
     lcs ← lcs + 1;
   else
     if i < j then
@@ -373,11 +375,11 @@ while i ≤ n and j ≤ m do
       i ← j;
     end
     for k ← 0 to O − 1 do
-      if i + k ≤ n and Si+k = Tj then
+      if i + k ≤ n and S[i+k] = T[j] then
         i ← i + k;
         break;
       end
-      if j + k ≤ m and Si = Tj+k then
+      if j + k ≤ m and S[i] = T[j+k] then
         j ← j + k;
         break;
       end
@@ -386,13 +388,12 @@ while i ≤ n and j ≤ m do
   i ← i + 1;
   j ← j + 1;
 end
-return Fn,m
+return lcs
 </code></pre>
 
 <p>This means that we should need to use some algorithm which is more
-efficient. One of such an algorithm we are using is Sift3b @sift3b,
-which is an approximate algorithm with speed optimizations, as shown on
-Algorithm [algo:sift3b].</p>
+efficient. One of such an algorithm we are using is Sift3b ,
+which is an approximate algorithm with speed optimizations, as shown above.</p>
 
 <p>Sift3b approximate the longest common subsequence by setting an
 parameter  \( O \) , or max offset, and ignoring attempts to matching
@@ -415,12 +416,12 @@ mean  \( \mu^{USA} \)  and the standard deviation  \( \sigma^{USA} \) . Then, we
 assume, that if some country has a mean value which is more than the
 mean value for the USA, then there is a high chance of the censorship
 leakage from Russia:
-\[ \mu^{country} &gt; \mu^{USA} + k\sigma^{USA} - country\ is\ affected \]
-\[ \mu^{country} \leq \mu^{USA} + k\sigma^{USA} - country\ is\ not\ affected \] </p>
+\[ \mu^{country} &gt; \mu^{USA} + k\sigma^{USA} - \text{country is affected} \]
+\[ \mu^{country} \leq \mu^{USA} + k\sigma^{USA} - \text{country is not affected} \] </p>
 
 <p>For the final step, we’ve collected more than 25000 webpages, using
 IPVanish and ExpressVPN servers, the results are presented in
-Figure [fig:results]. This bar chart shows that 4 countries (Belarus,
+Figure. This bar chart shows that 4 countries (Belarus,
 Estonia, Lithuania and Ukraine) show some signs of the possible
 censorship leakage.</p>
 
