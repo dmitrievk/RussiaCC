@@ -259,19 +259,19 @@ DataCollection(ListOfCountries, ListOfURLs)
   }
 </code></pre>
 
-<p>The algorithm goes through every country in the list of selected
-countries, then it establishes a VPN connection, and going through all
-141 urls from the list of blocked URLs in Russia, it accesses the
-webpage within 2 seconds timeout and stores its HTML code for the
-further comparison.</p>
+<p>The algorithm goes through every country in the list of selected countries, then it establishes a VPN connection, and then requests all 141 urls from the list of blocked URLs in Russia, it accesses the webpage within 2 seconds timeout and stores it's HTML code for the offline comparison.</p>
 
-<p>For the data collection purpose we implemented a special class -
+<p>For the purpose of data collection we implemented a special class -
 <code>CollectData</code>. Its instance connects to a specified VPN
 server and performs either collection of a single wep-page, specified by
 a URL from multiple countries, or collects a list of web-pages, using
 single VPN connection (Country major vs Website major order). This gives
 us the option of targeting a specific website in a small time windows to
 minimise differences in time sensitive content.</p>
+
+<p>We chose to collect the webpage is country major order rather than website major order because to time restrictions. 
+Collecting the website in website major order would be better as it would shrink the time window that we are accessing the webpages to minimize time based differences in the webpages. 
+This is inefficient in times as the vpn takes multiple seconds to connect and disconnect from the server, and if we had to do this for every webpage rather than every country the data collection portion of our project would take days rather than hours. </p>
 
 <p>After the web-page access attempt, there could be four possible
 outcomes:</p>
@@ -295,28 +295,30 @@ after 2 seconds (Timeout parameter).</p>
 <h2>
 <a id="web-page-comparison" class="anchor" href="#web-page-comparison" aria-hidden="true"><span class="octicon octicon-link"></span></a>Web Page Comparison</h2>
 
-<p>Web Page comparison is an essential part of our project. The aim is to
-compare similarity between different copies of a same page accessed from
-difference countries. Censorship usually alters the content of web
-pages, so if a pages is effected by censorship in one country, the
-content varies between a copy accessed from this country, and one from a
-reference country. In this scenario, comparing the similarity between
-these different copies provides us an efficient way to detect and
-quantify the content changes.</p>
+<p>Web Page comparison is an essential part of our project.
+The aim is to compare the similarity between different copies of the same page accessed from difference countries.
+Censorship usually alters the content of web pages, 
+so if a pages is effected by censorship in one country,
+the content varies between a copy accessed from this country,
+and one from a reference uncensored country.
+In this scenario, comparing the similarity
+between these different copies provides us an efficient
+way to detect and quantify the content changes.</p>
 
-<p>However, the content changes can also happen due to reasons besides
-censorship. Some of the reasons can be temporal, for example a change of
-time stamp in these copies are totally reasonable, while another example
-may be news block in some news sites. Also valid reasons are
-geographical customization, such as local news may vary from one place
-to another one.</p>
+<p>However, the content changes could also happen due to reasons
+besides censorship.
+Some of the reasons could be temporal, 
+for example a change of time stamp in these copies are totally reasonable,
+while another example may be recent news blocks in some news sites.
+Also valid reasons include geographical customization, 
+such as local news that varies from one place to another one.</p>
 
-<p>These two kinds of content changes are different: The changes due to
-censorship are tend to replace the whole page, while the normal changes
-are more block-wised, and thus preserving general architecture of web
-pages. Therefore, Our algorithm should be sensitive to a fully change
-page, but meanwhile insensitive to block changes, especially those small
-ones.</p>
+<p>These two kinds of content changes are different:
+The changes due to censorship tend to replace the whole page,
+while the normal changes are more block-wise, and thus 
+preserving general architecture of web pages.
+Therefore, Our algorithm should be sensitive to a fully change page,
+but meanwhile insensitive to  block changes, especially small ones.</p>
 
 <pre><code>
 Data: Two strings S[1...n] and T[1...m]
